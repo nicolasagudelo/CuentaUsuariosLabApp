@@ -1,0 +1,12 @@
+C:\Users\IDETECO\source\repos\Usuarios en el Lab\Usuarios en el Lab\bin\Debug\Usuarios en el Lab.exe.config
+C:\Users\IDETECO\source\repos\Usuarios en el Lab\Usuarios en el Lab\bin\Debug\Usuarios en el Lab.exe
+C:\Users\IDETECO\source\repos\Usuarios en el Lab\Usuarios en el Lab\bin\Debug\Usuarios en el Lab.pdb
+C:\Users\IDETECO\source\repos\Usuarios en el Lab\Usuarios en el Lab\bin\Debug\Usuarios en el Lab.xml
+C:\Users\IDETECO\source\repos\Usuarios en el Lab\Usuarios en el Lab\obj\Debug\Usuarios en el Lab.vbprojResolveAssemblyReference.cache
+C:\Users\IDETECO\source\repos\Usuarios en el Lab\Usuarios en el Lab\obj\Debug\Usuarios_en_el_Lab.Form1.resources
+C:\Users\IDETECO\source\repos\Usuarios en el Lab\Usuarios en el Lab\obj\Debug\Usuarios_en_el_Lab.Resources.resources
+C:\Users\IDETECO\source\repos\Usuarios en el Lab\Usuarios en el Lab\obj\Debug\Usuarios en el Lab.vbproj.GenerateResource.Cache
+C:\Users\IDETECO\source\repos\Usuarios en el Lab\Usuarios en el Lab\obj\Debug\Usuarios en el Lab.vbproj.CoreCompileInputs.cache
+C:\Users\IDETECO\source\repos\Usuarios en el Lab\Usuarios en el Lab\obj\Debug\Usuarios en el Lab.exe
+C:\Users\IDETECO\source\repos\Usuarios en el Lab\Usuarios en el Lab\obj\Debug\Usuarios en el Lab.xml
+C:\Users\IDETECO\source\repos\Usuarios en el Lab\Usuarios en el Lab\obj\Debug\Usuarios en el Lab.pdb
