@@ -28,14 +28,30 @@ Public Class Form1
     End Function
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
-
-        Timer1.Stop()
-        contador = 0
-        ContarUsuarios()
-        RevisarEstado(numero_usuarios)
-        TabControl1.SelectedIndex = 0
-        LblInfo.Text = "Personas en el laboratorio:"
-        LblNumero.Text = contador
+        Static time As Integer = 30
+        If time > 0 Then
+            If time < 10 Then
+                LabelTime.Text = "Tiempo para actualizar: 00:00:0" & time.ToString
+            Else
+                LabelTime.Text = "Tiempo para actualizar: 00:00:" & time.ToString
+            End If
+            time -= 1
+        Else
+            Timer1.Stop()
+            contador = 0
+            Me.Enabled = False
+            Panel1.Controls.Clear()
+            Panel2.Controls.Clear()
+            ContarUsuarios()
+            RevisarEstado(numero_usuarios)
+            TabControl1.SelectedIndex = 0
+            LblInfo.Text = "Personas en el laboratorio:"
+            LblNumero.Text = contador
+            time = 30
+            LabelTime.Text = "Tiempo para actualizar: 00:00:" & time.ToString
+            Timer1.Start()
+            Me.Enabled = True
+        End If
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -81,7 +97,7 @@ Public Class Form1
         For i = 1 To usuarios
             Try
                 Oledb = "Select name from USERINFO
-                        where USERID = " & i + 4 & ";"
+                        where USERID = " & i & ";"
                 conexion.Open()
                 comando = New OleDbCommand(Oledb, conexion)
                 nombres(i) = comando.ExecuteScalar
@@ -92,8 +108,23 @@ Public Class Form1
                 Exit Sub
             End Try
             Try
+                Oledb = "Select lastname from USERINFO
+                        where USERID = " & i & ";"
+                conexion.Open()
+                comando = New OleDbCommand(Oledb, conexion)
+                Dim temp As String = comando.ExecuteScalar.ToString
+                If temp <> "" Then
+                    nombres(i) = nombres(i) + " " + temp.Substring(0, 1) + "."
+                End If
+                conexion.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "Error")
+                conexion.Close()
+                Exit Sub
+            End Try
+            Try
                 Oledb = "Select CardNo from USERINFO
-                        where name = '" & nombres(i) & "';"
+                        where USERID = " & i & ";"
                 conexion.Open()
                 comando = New OleDbCommand(Oledb, conexion)
                 tarjetas(i) = comando.ExecuteScalar
@@ -127,6 +158,7 @@ Public Class Form1
             'Debug.WriteLine(estado(i))
             Dim j As Integer = 0
             Dim labels(usuarios)
+            labels(j) = Nothing
             If estado(i) = 1 Then
                 contador += 1
                 labels(j) = New Label
@@ -139,7 +171,7 @@ Public Class Form1
                 labels(j).Visible = True
                 labels(j).BorderStyle = BorderStyle.Fixed3D
                 labels(j).font = New Font("Arial", 12, FontStyle.Bold)
-                labels(j).parent = Me.UsuarioEnLab
+                Panel1.Controls.Add(labels(j))
                 If labels(j).text = "prueba" Or labels(j).text = "BACKUP" Then
                     labels(j).visible = False
                     y2 -= 40
@@ -153,7 +185,7 @@ Public Class Form1
                 j += 1
             End If
 
-                Dim k As Integer = 0
+            Dim k As Integer = 0
             Dim labels2(usuarios)
             If estado(i) = 2 Then
                 labels2(k) = New Label
@@ -166,7 +198,7 @@ Public Class Form1
                 labels2(k).Visible = True
                 labels2(k).BorderStyle = BorderStyle.Fixed3D
                 labels2(k).font = New Font("Arial", 12, FontStyle.Bold)
-                labels2(k).parent = Me.UsuariosNoEnLab
+                Panel2.Controls.Add(labels2(k))
                 If labels2(k).text = "prueba" Or labels2(k).text = "BACKUP" Then
                     labels2(k).visible = False
                     y2 -= 40
@@ -194,4 +226,5 @@ Public Class Form1
             LblInfo.Text = "Personas fuera del laboratorio"
         End If
     End Sub
+
 End Class
